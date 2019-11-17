@@ -7,8 +7,17 @@ class Purchases extends StatefulWidget {
   _PurchasesState createState() => _PurchasesState();
 }
 
+double sliderValue = 10.0;
+final myController = TextEditingController();
+
 class _PurchasesState extends State<Purchases> {
-  double _sliderValue = 10.0;
+  @override
+  void dispose() {
+    // Clean up the controller when the widget is disposed.
+    myController.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -51,17 +60,27 @@ class _PurchasesState extends State<Purchases> {
                   min: 0.0,
                   max: 15.0,
                   onChanged: (newRating) {
-                    setState(() => _sliderValue = newRating);
+                    setState(() => sliderValue = newRating);
                   },
-                  value: _sliderValue,
+                  value: sliderValue,
                 ),
               ),
             ),
             Container(
-              width: 50.0,
+              width: 100.0,
               alignment: Alignment.center,
-              child: Text('${_sliderValue.toInt()}',
+              child: Text('${sliderValue.toDouble().toStringAsFixed(2)}',
                   style: Theme.of(context).textTheme.display1),
+            ),
+            TextField(
+              controller: myController,
+              decoration: InputDecoration(
+                hintText: "Organization",
+                contentPadding: prefix0.padding,
+              ),
+            ),
+            Padding(
+              padding: prefix0.padding,
             ),
             Row(
               crossAxisAlignment: CrossAxisAlignment.center,
@@ -86,7 +105,19 @@ class _PurchasesState extends State<Purchases> {
                   padding: prefix0.padding,
                 ),
                 RaisedButton(
-                  onPressed: updatePercent,
+                  onPressed: () {
+                    updatePercent();
+                    return showDialog(
+                      context: context,
+                      builder: (context) {
+                        return AlertDialog(
+                          // Retrieve the text the user has entered by using the
+                          // TextEditingController.
+                          content: Text(myController.text),
+                        );
+                      },
+                    );
+                  },
                   child: Text('Submit'),
                   color: Colors.blueAccent,
                 ),
@@ -100,5 +131,7 @@ class _PurchasesState extends State<Purchases> {
 }
 
 void updatePercent() {
-  // http.post(url);
+  // Text();
+  http.get(
+      'http://0ed067b5.ngrok.io/emit?company=${myController.text}&category=Tuition&amount=${'${sliderValue.toDouble().toStringAsFixed(2)}'}&current-balance=2000');
 }
