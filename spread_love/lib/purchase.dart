@@ -19,10 +19,11 @@ class _PurchasesState extends State<Purchases> {
         child: Column(
           children: <Widget>[
             Text(
-              "% of Purchase Spread to Charity",
+              "Love you would like to spread",
               style: TextStyle(
-                color: Colors.lightGreenAccent,
+                color: Colors.greenAccent,
                 fontSize: 45.0,
+                fontWeight: FontWeight.bold,
               ),
             ),
             Padding(
@@ -46,7 +47,7 @@ class _PurchasesState extends State<Purchases> {
                 // 4. Flutter repaints everything that relies on sliderValue,
                 // in this case, just the slider at its new value.
                 child: Slider(
-                  activeColor: Colors.indigoAccent,
+                  activeColor: Colors.redAccent,
                   min: 0.0,
                   max: 15.0,
                   onChanged: (newRating) {

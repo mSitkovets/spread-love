@@ -210,18 +210,18 @@ class TransactionListState extends State<TransactionList> {
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: <Widget>[
-              FloatingActionButton(
+              RaisedButton(
+                color: Colors.red,
                 onPressed: () {
-                  Navigator.pushNamed(context, 'purchase');
+                  Navigator.pop(context);
                 },
               ),
               Padding(
                 padding: prefix0.padding,
               ),
-              RaisedButton(
-                color: Colors.red,
+              FloatingActionButton(
                 onPressed: () {
-                  Navigator.pop(context);
+                  Navigator.pushNamed(context, 'purchase');
                 },
               ),
             ],
