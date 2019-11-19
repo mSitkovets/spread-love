@@ -11,12 +11,12 @@ double sliderValue = 10.0;
 final myController = TextEditingController();
 
 class _PurchasesState extends State<Purchases> {
-  @override
-  void dispose() {
-    // Clean up the controller when the widget is disposed.
-    myController.dispose();
-    super.dispose();
-  }
+  // @override
+  // void dispose() {
+  //   // Clean up the controller when the widget is disposed.
+  //   myController.dispose();
+  //   super.dispose();
+  // }
 
   @override
   Widget build(BuildContext context) {

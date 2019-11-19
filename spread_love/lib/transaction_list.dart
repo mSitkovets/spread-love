@@ -94,7 +94,7 @@ class TransactionListState extends State<TransactionList> {
                     ),
                     contentPadding: prefix0.padding,
                     subtitle: Text(
-                      "\$" + data['all_transactions'][0]['company'].toString(),
+                      data['all_transactions'][0]['company'].toString(),
                       style: TextStyle(
                         fontSize: 15.0,
                       ),
