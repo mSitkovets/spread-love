@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<title>Simulator</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<!--===============================================================================================-->
+	<!--===============================================================================================-->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+	<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="static/font-awesome.css">
+	<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="static/animate.css">
+	<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="static/hamburgers.min.css">
+	<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="static/select2.min.css">
+	<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="static/util.css">
+	<link rel="stylesheet" type="text/css" href="static/main.css">
+
+</head>
+
+<body>
+
+	<div class="contact1">
+		<div class="container-contact1">
+
+			<form class="contact1-form validate-form">
+				<span class="contact1-form-title">
+					Your Account Balance: $ <span id="mah-balance">2000</span>
+				</span>
+
+				<div class="wrap-input1">
+					<input id="amount" class="input1" name="amount" placeholder="Enter Transaction Amount">
+				</div>
+
+				<div class="wrap-input1">
+					<input id="company" class="input1" type="text" placeholder="Enter Company Details">
+				</div>
+
+				<div class="wrap-input1">
+						<input id="category" class="input1" type="text" placeholder="Enter Transaction Category">
+					</div>
+
+				<div class="container-contact1-form-btn">
+					<button type="submit" id="submitval" class="contact1-form-btn">
+						<span>
+							Confirm Transaction
+						</span>
+					</button>
+				</div>
+			</form>
+		</div>
+	</div>
+
+</body>
+
+<script>
+		document.getElementById("submitval").addEventListener("click", function(event){
+			event.preventDefault();
+			const Http = new XMLHttpRequest();
+			var company = document.getElementById('company').value;
+			var category = document.getElementById('category').value;
+			var amount = parseFloat(document.getElementById('amount').value);
+			var current_balance = parseFloat(document.getElementById('mah-balance').innerHTML);
+			var url='/emit?company='+company+'&category='+category+'&amount='+amount+'&current-balance='+current_balance;
+			Http.open("GET", url);
+			Http.send();
+
+		Http.onreadystatechange = function(){
+			document.getElementById('company').value = "";
+			document.getElementById('category').value = "";
+			document.getElementById('amount').value = "";
+			document.getElementById('mah-balance').innerHTML = Http.responseText;
+		}
+	});
+
+	</script>
+
+</html>
